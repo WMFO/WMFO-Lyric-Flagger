@@ -6,46 +6,56 @@
 
 //LyricChecker Constructors
 LyricChecker::LyricChecker(void) {
-    checkWords = readWords(DEFAULT_FILENAME);
+    checkREs = readREs(DEFAULT_FILENAME);
 }
 
 LyricChecker::LyricChecker(const char* filename) {
-    checkWords = readWords(filename);
+    checkREs = readREs(filename);
 }
 
 //LyricChecker Destructors
 LyricChecker::~LyricChecker(void) {
-    delete checkWords;
+    delete checkREs;
 }
 
 //Private Functions
-list<string>* LyricChecker::readWords(const char* filename) {
-    ifstream wordFile;
-    wordFile.open(filename);
+list<boost::regex>* LyricChecker::readREs(const char* filename) {
+    ifstream reFile;
+    reFile.open(filename);
 
-    list<string>* checkWords = new list<string>;
-    string word;
+    list<boost::regex>* checkREs = new list<boost::regex>;
+    string sre;
+    boost::regex re;
     
-    if(wordFile.is_open()) {
-	while (!wordFile.eof()) {
-	    getline (wordFile,word);
-	    if(word.length()) {
-		checkWords->push_front(word);
+    if(reFile.is_open()) {
+	while(!reFile.eof()) {
+	    getline (reFile,sre);
+	    if(sre.length()) {
+		try {
+		    //Set up RE with case insensitivity
+		    re.assign(sre, boost::regex_constants::icase);
+		}
+		catch(boost::regex_error& e) {
+		    cerr << sre << " is not a valid regual expression: \""
+			 << e.what() << "\"" << endl;
+		    continue;
+		}
+		checkREs->push_front(re);
 	    }
 	}
     }
     else {
-	cerr << "Could not open file: " << filename << "\n";
+	cerr << "Could not open file: " << filename << endl;
     }
     
-    return checkWords;
+    return checkREs;
 }
 
 //Public Functions
-void LyricChecker::printWords(void) {
-    list<string>::iterator iter;
-    for (iter = checkWords->begin(); iter != checkWords->end(); iter++) {
-	cout << *iter << "\n";
+void LyricChecker::printREs(void) {
+    list<boost::regex>::iterator iter;
+    for (iter = checkREs->begin(); iter != checkREs->end(); iter++) {
+	cout << iter->str() << "\n";
     }
 }
 
@@ -54,10 +64,10 @@ int main(int argv, char** argc){
     
     cout << "test1\n";
     LyricChecker test1;
-    test1.printWords();
+    test1.printREs();
 
     cout << "test2\n";
     LyricChecker test2("checkwords2");
-    test2.printWords();
+    test2.printREs();
 
 };

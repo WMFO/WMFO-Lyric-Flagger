@@ -24,13 +24,17 @@ public:
     ~LyricChecker(void);
     
     //Functions
-    void printWords(void);
+    void printREs(void);
+    //int countOccurances();
 
 private:
     //Data
-    list<string>* checkWords;
+    list<boost::regex>* checkREs;
+
+    //Regex
+    boost::regex re;
 
     //Functions
-    list<string>* readWords(const char* filename);
+    list<boost::regex>* readREs(const char* filename);
 
 };
