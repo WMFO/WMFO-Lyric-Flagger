@@ -1,11 +1,15 @@
 //WMFO
 //Andy Sayler
-//lyricsCheck.cpp
+//lyricsCheck.hpp
 
 #include <iostream>
 #include <fstream>
 #include <list>
 #include <string>
+
+#include <boost/regex.hpp>
+
+#define DEFAULT_FILENAME "checkwords"
 
 using namespace std;
 

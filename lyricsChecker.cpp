@@ -2,16 +2,7 @@
 //Andy Sayler
 //lyricsCheck.cpp
 
-#include <iostream>
-#include <fstream>
-#include <list>
-#include <string>
-
 #include "lyricsChecker.hpp"
-
-using namespace std;
-
-#define DEFAULT_FILENAME "checkwords"
 
 //LyricChecker Constructors
 LyricChecker::LyricChecker(void) {
@@ -53,8 +44,7 @@ list<string>* LyricChecker::readWords(const char* filename) {
 //Public Functions
 void LyricChecker::printWords(void) {
     list<string>::iterator iter;
-    for (iter = checkWords->begin();
-	 iter != checkWords->end(); iter++) {
+    for (iter = checkWords->begin(); iter != checkWords->end(); iter++) {
 	cout << *iter << "\n";
     }
 }
