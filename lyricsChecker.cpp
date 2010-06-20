@@ -67,7 +67,7 @@ int main(int argv, char** argc){
     test1.printREs();
 
     cout << "test2\n";
-    LyricChecker test2("checkwords2");
+    LyricChecker test2("check_res2");
     test2.printREs();
 
 };

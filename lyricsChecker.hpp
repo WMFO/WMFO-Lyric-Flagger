@@ -9,7 +9,7 @@
 
 #include <boost/regex.hpp>
 
-#define DEFAULT_FILENAME "checkwords"
+#define DEFAULT_FILENAME "check_res"
 
 using namespace std;
 
