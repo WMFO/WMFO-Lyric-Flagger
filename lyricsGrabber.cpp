@@ -1,7 +1,12 @@
 #include "lyricsGrabber.hpp"
 
-namespace lyricGrabber {
+namespace lyricsGrabber {
     
+    //Static Function Prototypes
+    static int lyricsFly(string title, string artist, string album,
+			 string& lyrics);
+
+
     extern list<string>* getLyrics(string title, string artist, string album) {
 	
 	list<string>* lyrics = new list<string>;
@@ -20,7 +25,6 @@ namespace lyricGrabber {
 			 string& lyrics) {
 	
 	
-	//7b641f6c9ad39bdc9-temporary.API.access
 	//TODO: take care of status codes and such. For example
 	//take care of us querying too fast. Also split mult-
 	//iple results into different list entries?
@@ -80,11 +84,19 @@ namespace lyricGrabber {
 	    }
 	}
 	
-	
+	//Get Key From Keyfile
+	//Weekly keys are available from http://lyricsfly.com/api/
+	//Review terms and request permanent keys at
+	//http://lyricsfly.com/contact/
+	ifstream keyFile;
+	string skey;
+	keyFile.open(LYRICSFLY_KEYFILE);
+	getline(keyFile,skey);
+
 	//Creation of the command to run from the shell.
 	stringstream curl;
 	curl << "curl \"http://api.lyricsfly.com/api/api.php?";
-	curl << "i=7b641f6c9ad39bdc9-temporary.API.access&a=";
+	curl << "i=" << skey << "&a=";
 	curl << url_artist.str().c_str() << "&t=" << url_title.str().c_str()
 	     << "\"";
 	curl << " > tmp";

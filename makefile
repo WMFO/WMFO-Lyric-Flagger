@@ -4,7 +4,7 @@
 # makefile
 
 CC=g++
-CFLAGS=-c -Wall
+CFLAGS=-c -Wall -g
 LFLAGS=-static
 EXECUTABLE=test_main
 OBJECTS=lyricsChecker.o lyricsGrabber.o test_main.o

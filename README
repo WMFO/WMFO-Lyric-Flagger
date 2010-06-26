@@ -5,6 +5,15 @@ WMFO - Tufts Freeform Radio
 ops@wmfo.org
 6-18-10
 
+This is a program that query the Internet for lyrics to a specific
+song and then searches these lyrics for matches to a list of regular
+expression. Example use is to search a database of songs for those that
+contain explicit lyrics and then flag these songs.
+
 This is a work in progress
 
 Run make to build
+
+Requirements:
+Boost Regex
+Curl

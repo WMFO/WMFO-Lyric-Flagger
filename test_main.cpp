@@ -5,6 +5,8 @@
 
 #include "lyricsChecker.hpp"
 
+using namespace std;
+
 //Test main
 int main(int argv, char** argc){
     
@@ -16,4 +18,10 @@ int main(int argv, char** argc){
     LyricChecker test2("check_res2");
     test2.printREs();
 
+    list<string>* test = lyricsGrabber::getLyrics("Ziggy Stardust",
+						  "David Bowie", "");
+    list<string>::iterator test_iter;
+    for (test_iter = test->begin(); test_iter != test->end(); test_iter++) {
+	cout << *test_iter << "\n";
+    }
 };

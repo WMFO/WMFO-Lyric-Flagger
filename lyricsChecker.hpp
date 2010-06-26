@@ -9,6 +9,10 @@
 
 #include <boost/regex.hpp>
 
+#include "lyricsGrabber.hpp"
+
+//Constants
+//Check REs File
 #define DEFAULT_FILENAME "check_res"
 
 using namespace std;
