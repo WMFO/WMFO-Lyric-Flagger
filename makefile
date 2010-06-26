@@ -6,15 +6,18 @@
 CC=g++
 CFLAGS=-c -Wall
 LFLAGS=-static
-EXECUTABLE=lyricsChecker
-OBJECTS=lyricsChecker.o lyricsGrabber.o
+EXECUTABLE=test_main
+OBJECTS=lyricsChecker.o lyricsGrabber.o test_main.o
 EXECUTABLE_TEST=regex_test
 LIBS=-L/usr/lib -lboost_regex -lpthread
 
 all: $(EXECUTABLE)
 
-lyricsChecker: $(OBJECTS)
+test_main: $(OBJECTS)
 	$(CC) $(LFLAGS) $(OBJECTS) -o $(EXECUTABLE) $(LIBS)
+
+test_main.o: test_main.cpp
+	$(CC) $(CFLAGS) test_main.cpp
 
 lyricsChecker.o: lyricsChecker.cpp lyricsChecker.hpp
 	$(CC) $(CFLAGS) lyricsChecker.cpp

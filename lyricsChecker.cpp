@@ -58,16 +58,3 @@ void LyricChecker::printREs(void) {
 	cout << iter->str() << "\n";
     }
 }
-
-//Test main
-int main(int argv, char** argc){
-    
-    cout << "test1\n";
-    LyricChecker test1;
-    test1.printREs();
-
-    cout << "test2\n";
-    LyricChecker test2("check_res2");
-    test2.printREs();
-
-};
