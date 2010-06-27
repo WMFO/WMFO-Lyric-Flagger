@@ -29,7 +29,7 @@ public:
     
     //Functions
     void printREs(void);
-    //int countOccurances();
+    list< list<int> > checkLyrics(string title, string artist, string album);
 
 private:
     //Data
