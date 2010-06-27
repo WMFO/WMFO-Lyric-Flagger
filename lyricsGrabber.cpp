@@ -96,6 +96,7 @@ namespace lyricsGrabber {
 	string skey;
 	keyFile.open(LYRICSFLY_KEYFILE);
 	getline(keyFile,skey);
+	keyfile.close();
 
 	//Creation of the command to run from the shell.
 	stringstream curl;
