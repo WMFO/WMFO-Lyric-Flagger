@@ -5,11 +5,12 @@
 
 CC=g++
 CFLAGS=-c -Wall -g
-LFLAGS=-static
+LFLAGS=
 EXECUTABLE=test_main
 OBJECTS=lyricsChecker.o lyricsGrabber.o test_main.o
 EXECUTABLE_TEST=regex_test
-LIBS=-L/usr/lib -lboost_regex -lpthread
+LIBS=-L/usr/lib -lboost_regex
+STATICLIBS=-lpthread
 
 all: $(EXECUTABLE)
 

@@ -34,8 +34,8 @@ namespace lyricsGrabber {
 	
 	//First we must sanitize the paramters. Any non-alpha
 	//numerics (or spaces) are replaced with '%'
-	char* san_title = new char[title.size()];
-	char* san_artist = new char[artist.size()];
+	char* san_title = new char[title.size()+1];
+	char* san_artist = new char[artist.size()+1];
 	
 	strcpy(san_title, title.c_str());
 	strcpy(san_artist, artist.c_str());
@@ -84,6 +84,10 @@ namespace lyricsGrabber {
 	    }
 	}
 	
+	//Clean Up
+	delete[] san_title;
+	delete[] san_artist;
+
 	//Get Key From Keyfile
 	//Weekly keys are available from http://lyricsfly.com/api/
 	//Review terms and request permanent keys at
@@ -142,6 +146,9 @@ namespace lyricsGrabber {
 	    }
 	}
 	
+	//Clean Up
+	delete[] a;
+
 	//Return the results.
 	lyrics = return_buf.str();
 	
