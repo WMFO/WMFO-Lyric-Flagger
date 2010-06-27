@@ -123,7 +123,7 @@ namespace lyricsGrabber {
 	//Take out only the actual lyrics from the stuff.
 	stringstream return_buf;
 	
-	char* a = new char[buf.str().size()];
+	char* a = new char[buf.str().size() + 1]; //+1 for null terminator
 	strcpy(a,buf.str().c_str());
 	bool inLyrics = false;
 	for (unsigned i = 0; i < buf.str().size() - 5; i++) {

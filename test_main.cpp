@@ -10,13 +10,15 @@ using namespace std;
 //Test main
 int main(int argv, char** argc){
     
-    //    cout << "test1\n";
+    //cout << "test1\n";
     //LyricChecker test1;
     //test1.printREs();
 
-    cout << "test2\n";
+    //for (int i = 0; i < 10000; i++){
+
+    cout << "test2" << endl;
     LyricChecker test2("check_res2");
-    //test2.printREs();
+    test2.printREs();
 
     //list<string>* test = lyricsGrabber::getLyrics("Working Class Hero",
     //						  "John Lennon", "");
@@ -26,19 +28,18 @@ int main(int argv, char** argc){
     //}
     //delete test;
 
-
     list< list<int> > occurances = test2.checkLyrics("Working Class Hero",
-						     "John Lennon", "");
+    						     "John Lennon", "");
 
     list<int>::iterator int_iter;
     list< list<int> >::iterator list_iter;
     for (list_iter = occurances.begin(); list_iter != occurances.end();
-	 list_iter++) {
-	for (int_iter = list_iter->begin(); int_iter != list_iter->end();
-	     int_iter++) {
-	    cout << *int_iter << " ";
-	}
-	cout << "\n";
+    	 list_iter++) {
+    	for (int_iter = list_iter->begin(); int_iter != list_iter->end();
+    	     int_iter++) {
+    	    cout << *int_iter << " ";
+    	}
+    	cout << "\n";
     }
-    
+    //}
 };

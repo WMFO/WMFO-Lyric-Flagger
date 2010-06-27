@@ -80,8 +80,8 @@ list< list<int> > LyricChecker::checkLyrics(string title,
 	    
 	    string s = *s_iter;
 
-	    cout << endl << "-----Start String-----" << endl << s
-		 << endl << "------End String------" << endl;
+	    //cout << endl << "-----Start String-----" << endl << s
+	    //	 << endl << "------End String------" << endl;
 
 	    //Perform Search
 	    boost::sregex_token_iterator p(s.begin(), s.end(), 
@@ -94,8 +94,8 @@ list< list<int> > LyricChecker::checkLyrics(string title,
 		count++;
 		p++;
 	    }
-	    cout << "RE: " << re.str() << endl;	
-	    cout << "Count: " << count << endl;
+	    //cout << "RE: " << re.str() << endl;	
+	    //cout << "Count: " << count << endl;
 	    counts.push_back(count);
 	}
 	occurances.push_back(counts);
