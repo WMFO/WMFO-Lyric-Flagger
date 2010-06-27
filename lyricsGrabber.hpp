@@ -9,8 +9,11 @@
 
 using namespace std;
 
-namespace lyricGrabber {
+//Constants
+//LyricsFly Key File
+#define LYRICSFLY_KEYFILE "lyricsfly_key"
+
+namespace lyricsGrabber {
+    //Public Functions
     extern list<string>* getLyrics(string title, string artist, string album);
-    static int lyricsFly(string title, string artist, string album,
-			 string& lyrics);
 }
