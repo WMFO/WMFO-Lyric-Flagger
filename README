@@ -10,6 +10,12 @@ song and then searches these lyrics for matches to a list of regular
 expression. Example use is to search a database of songs for those that
 contain explicit lyrics and then flag these songs.
 
+This project makes use of the LyricFly lookup API. A production key
+is necessary to make full use of the program. For more info, see
+the website: http://lyricsfly.com/api/. Temporary weekly keys
+are also available form the previous link. Please visit
+http://lyricsfly.com/ for details.
+
 This is a work in progress
 
 Run make to build
