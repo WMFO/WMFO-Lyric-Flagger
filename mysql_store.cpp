@@ -7,6 +7,7 @@
 #include <string>
 #include <typeinfo>
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -14,7 +15,6 @@ using namespace std;
 class lyrics_mysql {
 	public:
 		void getSong(int i);
-		void getSongbyID();
 		string artist();
 		string title();
 		string album();
@@ -22,6 +22,7 @@ class lyrics_mysql {
 		void connect(string host, unsigned int port, string user, string pass, string db);
 		int query(string q);
 		lyrics_mysql();
+		~lyrics_mysql();
 	private:
 		string s_artist;
 		string s_title;
@@ -38,6 +39,22 @@ lyrics_mysql::lyrics_mysql() {
 	s_album.clear();
 	ID = -1;
 }
+
+lyrics_mysql::~lyrics_mysql() {
+	myConnect.disconnect();
+}
+
+
+int lyrics_mysql::mark(string group) {
+	stringstream a;
+	a << "UPDATE CART SET GROUP_NAME=\"" << group << "\" WHERE ARTIST=\"" << s_artist \
+		<< "\" AND TITLE=\"" << s_title << "\" AND ALBUM=\"" << s_album << "\"\n";
+
+	mysqlpp::Query myQuery = myConnect.query(a.str().c_str());
+	myQuery.use();
+	
+	return 1;
+};
 
 void lyrics_mysql::connect(string host, unsigned int port, string user, string pass, string db) {
 
@@ -113,8 +130,9 @@ int main() {
 	a.connect("127.0.0.1", 0, "root", "", "Rivendell");
 	int num_row = a.query("select ARTIST,TITLE,ALBUM from CART WHERE ARTIST=\"David Bowie\"");
 
-	for (int i = 0; i = num_row; i++) {
+	for (int i = 0; i < num_row; i++) {
 		a.getSong(i);
+		a.mark("MUSIC");
 		cout << a.artist() << endl << a.title() << endl << a.album() << endl << endl;
 	}
 	return 0;
