@@ -1,37 +1,8 @@
 //Work in progress
 //For the time being, header and a test main will be here.
 //TODO: Minor idealogical cleanup, formatting, group change function
+#include "mysql_store.hpp"
 
-#define MYSQLPP_MYSQL_HEADERS_BURIED
-#include <mysql++/mysql++.h>
-#include <string>
-#include <typeinfo>
-#include <iostream>
-#include <sstream>
-
-using namespace std;
-
-
-class lyrics_mysql {
-	public:
-		void getSong(int i);
-		string artist();
-		string title();
-		string album();
-		int mark(string group);
-		void connect(string host, unsigned int port, string user, string pass, string db);
-		int query(string q);
-		lyrics_mysql();
-		~lyrics_mysql();
-	private:
-		string s_artist;
-		string s_title;
-		string s_album;
-		int ID;
-		mysqlpp::Connection myConnect;
-		mysqlpp::StoreQueryResult res;
-
-};
 
 lyrics_mysql::lyrics_mysql() {
 	s_artist.clear();
@@ -88,9 +59,9 @@ int lyrics_mysql::query(string q) {
 
 }
 
-void lyrics_mysql::getSong(int i) {
+void lyrics_mysql::getSong(unsigned int i) {
 
-	if (i < 0 || i >= res.num_rows()) {
+	if ((i < 0) || (i >= res.num_rows())) {
 		cerr << "Invalid index passed!\n";
 		cerr << "Inside lyrics_mysql::getSong\n";
 		exit(-1);
