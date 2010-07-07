@@ -5,10 +5,21 @@ WMFO - Tufts Freeform Radio
 ops@wmfo.org
 6-18-10
 
-This is a program that query the Internet for lyrics to a specific
+This is a program that querys the Internet for lyrics to a specific
 song and then searches these lyrics for matches to a list of regular
-expression. Example use is to search a database of songs for those that
-contain explicit lyrics and then flag these songs.
+expression.
+
+Example use is to search a database of songs for those that
+contain explicit lyrics and then flag these songs. An SQL frontend
+compatible with the Rivendell Radio Automation software is also
+being developed as part of this project. For more information on
+Rivendell, see http://www.rivendellaudio.org/.
+
+This project makes use of the LyricFly lookup API. A production key
+is necessary to make full use of the program. For more info, see
+the website: http://lyricsfly.com/api/. Temporary weekly keys
+are also available from the previous link. To request a full key,
+visit http://lyricsfly.com/.
 
 This is a work in progress
 
