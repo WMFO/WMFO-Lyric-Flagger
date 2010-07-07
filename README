@@ -28,3 +28,4 @@ Run make to build
 Requirements:
 Boost Regex
 Curl
+mysql++
