@@ -14,8 +14,6 @@ int main(int argv, char** argc){
     //LyricChecker test1;
     //test1.printREs();
 
-    //for (int i = 0; i < 10000; i++){
-
     cout << "test2" << endl;
     LyricChecker test2("check_res2");
     test2.printREs();
@@ -41,5 +39,4 @@ int main(int argv, char** argc){
     	}
     	cout << "\n";
     }
-    //}
 };

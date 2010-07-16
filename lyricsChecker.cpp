@@ -74,7 +74,7 @@ list< list<int> > LyricChecker::checkLyrics(string title,
 
 	list<int> counts;
 	
-	//Loop through all lyrics
+	//Loop through all lyric sets
 	list<string>::iterator s_iter;
 	for (s_iter = lyrics->begin(); s_iter != lyrics->end(); s_iter++) {
 	    
@@ -84,8 +84,7 @@ list< list<int> > LyricChecker::checkLyrics(string title,
 	    //	 << endl << "------End String------" << endl;
 
 	    //Perform Search
-	    boost::sregex_token_iterator p(s.begin(), s.end(), 
-					   re, 0);
+	    boost::sregex_token_iterator p(s.begin(), s.end(), re, 0);
 	    boost::sregex_token_iterator end;
 	    
 	    //Count occurances
