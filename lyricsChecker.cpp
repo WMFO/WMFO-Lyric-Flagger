@@ -61,7 +61,7 @@ void LyricChecker::printREs(void) {
 
 
 list< list<int> > LyricChecker::checkLyrics(string title,
-					  string artist, string album) {
+					    string artist, string album) {
     list< list<int> > occurances;
     
     //Fetch linked list of lyrics
@@ -80,9 +80,6 @@ list< list<int> > LyricChecker::checkLyrics(string title,
 	    
 	    string s = *s_iter;
 
-	    //cout << endl << "-----Start String-----" << endl << s
-	    //	 << endl << "------End String------" << endl;
-
 	    //Perform Search
 	    boost::sregex_token_iterator p(s.begin(), s.end(), re, 0);
 	    boost::sregex_token_iterator end;
@@ -93,8 +90,6 @@ list< list<int> > LyricChecker::checkLyrics(string title,
 		count++;
 		p++;
 	    }
-	    //cout << "RE: " << re.str() << endl;	
-	    //cout << "Count: " << count << endl;
 	    counts.push_back(count);
 	}
 	occurances.push_back(counts);
@@ -102,4 +97,26 @@ list< list<int> > LyricChecker::checkLyrics(string title,
 
     delete lyrics;
     return occurances;
+}
+
+bool LyricChecker::isPositiveMatch(string title, string artist, string album){
+    bool posMatch = false;
+    list< list<int> > occurances = checkLyrics(title, artist, album);
+
+    //Loop through occurances for each regex
+    list< list<int> >::iterator out_iter;
+    for (out_iter = occurances.begin();
+	 (out_iter != occurances.end()) && (posMatch == false);
+	 out_iter++) {
+	//Loop throguh occurances for each lyric set
+	list<int>::iterator in_iter;
+	for (in_iter = out_iter->begin();
+	     (in_iter != out_iter->end()) && (posMatch == false);
+	     in_iter++) {
+	    if ((*in_iter) > 0) {
+		posMatch = true;
+	    }
+	}
+    }
+    return posMatch;
 }

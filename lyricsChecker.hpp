@@ -30,13 +30,11 @@ public:
     //Functions
     void printREs(void);
     list< list<int> > checkLyrics(string title, string artist, string album);
+    bool isPositiveMatch(string title, string artist, string album);
 
 private:
     //Data
     list<boost::regex>* checkREs;
-
-    //Regex
-    boost::regex re;
 
     //Functions
     list<boost::regex>* readREs(const char* filename);

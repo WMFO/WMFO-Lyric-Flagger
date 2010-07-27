@@ -4,19 +4,17 @@
 //6-26-10
 
 #include "lyricsChecker.hpp"
+#include <pthread.h>
 
 using namespace std;
 
 //Test main
 int main(int argv, char** argc){
     
-    //cout << "test1\n";
-    //LyricChecker test1;
-    //test1.printREs();
-
-    cout << "test2" << endl;
-    LyricChecker test2("check_res2");
-    test2.printREs();
+    cout << "---Test Explicit Detection---" << endl;
+    LyricChecker test("check_res");
+    cout << "Searching For:" << endl;
+    test.printREs();
 
     //list<string>* test = lyricsGrabber::getLyrics("Working Class Hero",
     //						  "John Lennon", "");
@@ -26,9 +24,13 @@ int main(int argv, char** argc){
     //}
     //delete test;
 
-    list< list<int> > occurances = test2.checkLyrics("Working Class Hero",
-    						     "John Lennon", "");
+    string title = "Working Class Hero";
+    string artist = "John Lennon";
+    string album = "";
 
+    list< list<int> > occurances = test.checkLyrics(title, artist, album);
+
+    cout << "Counts Detected:" << endl;
     list<int>::iterator int_iter;
     list< list<int> >::iterator list_iter;
     for (list_iter = occurances.begin(); list_iter != occurances.end();
@@ -37,6 +39,11 @@ int main(int argv, char** argc){
     	     int_iter++) {
     	    cout << *int_iter << " ";
     	}
-    	cout << "\n";
+    	cout << endl;
     }
+
+    sleep(4);
+
+    bool isMatch = test.isPositiveMatch(title, artist, album);
+    cout << "Match?: " << isMatch << endl;
 };
