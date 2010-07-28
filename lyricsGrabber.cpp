@@ -174,33 +174,40 @@ namespace lyricsGrabber {
 	//Take out only the actual lyrics from the stuff.
 	stringstream return_buf;
 	
-	//char* a = new char[length + 1]; //+1 for null terminator
-	//strcpy(a,buf);
-	bool inLyrics = false;
-	bool anyLyrics = false;
-	for (unsigned i = 0; i < length - 5; i++) {
-	    if (inLyrics == false) {
-		if ( strncmp(buf+i, "<tx>", 4) == 0) {
-		    inLyrics = true;
-		    anyLyrics = true;
-		    i = i+3;
-		}
-	    } else {
-		if ( strncmp(buf+i, "</tx>", 5) == 0) {
-		    inLyrics = false;
-		    i = i + 4;
-		} else {
-		    return_buf << buf[i];
-		}
-	    }
+	regex_t reg;
+	if (regcomp(&reg, "<tx>[^><]*</tx>", REG_ICASE|REG_EXTENDED) != 0) {
+		cout << "Regex Error\n\n";
+		exit(-1);
 	}
+
+	regmatch_t match;
+
+	bool anyLyrics = false;
+
+	char* buf_point = buf;
+	int status = regexec(&reg, buf_point, 1, &match, 0);
+	while (status == 0) {
+		anyLyrics = true;
+		int len = match.rm_eo - match.rm_so;
+		char* lyrics_buf = new char[len];
+		strncpy(lyrics_buf, buf_point+match.rm_so, len);
+		lyrics_buf[len-5] = '\0';
+		return_buf << lyrics_buf + 4;
+		return_buf << "\n\n\n";
+		delete[] lyrics_buf;
+		buf_point = buf_point + match.rm_eo;
+		status = regexec(&reg, buf_point, 1, &match, 0);
+	}
+
 	
 	delete[] buf;
 
 	//Return the results.
 	lyrics = return_buf.str();
+
 	if (anyLyrics == false)
 		return -1;
+
 	return 0;
     }
     
