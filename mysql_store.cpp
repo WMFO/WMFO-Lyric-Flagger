@@ -94,18 +94,3 @@ string lyrics_mysql::album() {
 	return s_album;
 }
 
-	
-
-int main() {
-	lyrics_mysql a;
-	a.connect("127.0.0.1", 0, "root", "", "Rivendell");
-	int num_row = a.query("select ARTIST,TITLE,ALBUM from CART WHERE ARTIST=\"David Bowie\"");
-
-	for (int i = 0; i < num_row; i++) {
-		a.getSong(i);
-		a.mark("MUSIC");
-		cout << a.artist() << endl << a.title() << endl << a.album() << endl << endl;
-	}
-	return 0;
-}
-

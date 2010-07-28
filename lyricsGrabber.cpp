@@ -1,4 +1,12 @@
 #include "lyricsGrabber.hpp"
+#include <sys/types.h>
+#include <regex.h>
+#include <ctime>
+#include <cstring>
+#include <unistd.h>
+
+using namespace std;
+
 
 namespace lyricsGrabber {
     
@@ -23,11 +31,6 @@ namespace lyricsGrabber {
     
     static int lyricsFly(string title, string artist, string album,
 			 string& lyrics) {
-	
-	
-	//TODO: take care of status codes and such. For example
-	//take care of us querying too fast. Also split mult-
-	//iple results into different list entries?
 	
 	lyrics.clear();
 	
@@ -104,55 +107,100 @@ namespace lyricsGrabber {
 	curl << "i=" << skey << "&a=";
 	curl << url_artist.str().c_str() << "&t=" << url_title.str().c_str()
 	     << "\"";
-	curl << " > tmp";
+	curl << " > tmp 2> /dev/null";
+
+
+	char* buf;
+	int length;
+	bool good_to_go = false;
 	
-	//System Call
-	system(curl.str().c_str());
+	do {
+		//System Call
+		system(curl.str().c_str());
 	
-	//Load the results into a buffer
-	ifstream in;
-	in.open("tmp");
+		ifstream in;
+		in.open("tmp");
+		
+		if (in == NULL)
+		return  -1;
+		
+		in.seekg(0,ios::end);
+		length = in.tellg();
+		in.seekg(0, ios::beg);
+
+		buf = new char[length+1];
+		buf[length] = '\0';
+
+		in.read(buf, length);
+		in.close();
+
+		regex_t reg;
+		if (regcomp(&reg, "<status>...</status>", REG_ICASE|REG_EXTENDED) != 0) {
+			cout << "Regex error 1.\n";
+			exit(-1);
+		}
 	
-	if (in == NULL)
-	    return  -1;
+		regmatch_t matches;
+		int status = regexec(&reg, buf, 1, &matches, 0);
 	
+		if (status != 0) {
+			char tmp[50];
+			regerror(status, NULL, tmp, 50);
+			cout << tmp << "\n\n";
+			exit(-1);
+		}
+
+		char* stat_code;
+		stat_code = new char[matches.rm_eo-matches.rm_so+1]; //+1 for NULL terminator!
+		strncpy(stat_code, buf+matches.rm_so, matches.rm_eo-matches.rm_so);
+		stat_code[matches.rm_eo-matches.rm_so] = '\0';
+		cout << stat_code <<"\n\n";	
+		if (strcmp(stat_code, "<status>200</status>") != 0) {
+			if (strcmp(stat_code, "<status>402</status>") == 0) {
+				good_to_go=false;
+				delete[] buf;
+				sleep(4);
+			} else {
+				good_to_go = true;
+			}
+		} else {	
+			good_to_go = true;
+		}
+
+		regfree(&reg);
 	
-	stringstream buf;
-	while ( !in.eof() ) {
-	    char a = in.get();
-	    buf << a;
-	}
-	
-	in.close();
-	
+	} while (good_to_go == false);
+
 	//Take out only the actual lyrics from the stuff.
 	stringstream return_buf;
 	
-	char* a = new char[buf.str().size() + 1]; //+1 for null terminator
-	strcpy(a,buf.str().c_str());
+	//char* a = new char[length + 1]; //+1 for null terminator
+	//strcpy(a,buf);
 	bool inLyrics = false;
-	for (unsigned i = 0; i < buf.str().size() - 5; i++) {
+	bool anyLyrics = false;
+	for (unsigned i = 0; i < length - 5; i++) {
 	    if (inLyrics == false) {
-		if ( strncmp(a+i, "<tx>", 4) == 0) {
+		if ( strncmp(buf+i, "<tx>", 4) == 0) {
 		    inLyrics = true;
+		    anyLyrics = true;
 		    i = i+3;
 		}
 	    } else {
-		if ( strncmp(a+i, "</tx>", 5) == 0) {
+		if ( strncmp(buf+i, "</tx>", 5) == 0) {
 		    inLyrics = false;
 		    i = i + 4;
 		} else {
-		    return_buf << a[i];
+		    return_buf << buf[i];
 		}
 	    }
 	}
 	
-	//Clean Up
-	delete[] a;
+	delete[] buf;
 
 	//Return the results.
 	lyrics = return_buf.str();
-	
+	if (anyLyrics == false)
+		return -1;
 	return 0;
     }
     
