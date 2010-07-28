@@ -29,3 +29,18 @@ Requirements:
 Boost Regex
 Curl
 mysql++
+
+Libraries as reported by ldd:
+libmysqlpp
+libstdc++
+libm
+libgcc_s
+libc
+libmysqlclient
+libcrypt
+libnsl
+libssl
+libcrypto
+libz
+libdl
+
