@@ -7,13 +7,11 @@
 
 using namespace std;
 
-
 namespace lyricsGrabber {
     
     //Static Function Prototypes
     static int lyricsFly(string title, string artist, string album,
 			 string& lyrics);
-
 
     extern list<string>* getLyrics(string title, string artist, string album) {
 	
