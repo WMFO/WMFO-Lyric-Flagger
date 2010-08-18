@@ -67,6 +67,12 @@ list< list<int> > LyricChecker::checkLyrics(string title,
     //Fetch linked list of lyrics
     list<string>* lyrics = lyricsGrabber::getLyrics(title, artist, album);
 
+    //Check for empty list
+    if (lyrics->empty() == true) {
+	delete lyrics;
+	return occurances;
+    }
+
     //Loop through all regexs
     list<boost::regex>::iterator re_iter;
     for (re_iter = checkREs->begin(); re_iter != checkREs->end(); re_iter++) {
@@ -99,9 +105,12 @@ list< list<int> > LyricChecker::checkLyrics(string title,
     return occurances;
 }
 
-bool LyricChecker::isPositiveMatch(string title, string artist, string album){
+lyric_code LyricChecker::isPositiveMatch(string title, string artist, string album){
     bool posMatch = false;
     list< list<int> > occurances = checkLyrics(title, artist, album);
+
+    if (occurances.empty() == true)
+	return NOT_FOUND;
 
     //Loop through occurances for each regex
     list< list<int> >::iterator out_iter;
@@ -118,5 +127,10 @@ bool LyricChecker::isPositiveMatch(string title, string artist, string album){
 	    }
 	}
     }
-    return posMatch;
+
+    if (posMatch == true) {
+	return EXPLICIT;
+    } else {
+	return SAFE;
+    }
 }

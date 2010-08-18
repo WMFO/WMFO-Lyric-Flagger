@@ -1,4 +1,5 @@
 #include "lyricsGrabber.hpp"
+#include "config.hpp"
 #include <sys/types.h>
 #include <regex.h>
 #include <ctime>
@@ -95,9 +96,10 @@ namespace lyricsGrabber {
 	//http://lyricsfly.com/contact/
 	ifstream keyFile;
 	string skey;
-	keyFile.open(LYRICSFLY_KEYFILE);
-	getline(keyFile,skey);
-	keyFile.close();
+	skey = lyric_con::return_config("lyricskey");	
+//	keyFile.open(LYRICSFLY_KEYFILE);
+//	getline(keyFile,skey);
+//	keyFile.close();
 
 	//Creation of the command to run from the shell.
 	stringstream curl;

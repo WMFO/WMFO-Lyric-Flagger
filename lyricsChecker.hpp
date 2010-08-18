@@ -18,6 +18,8 @@
 
 using namespace std;
 
+enum lyric_code {EXPLICIT, SAFE, NOT_FOUND};
+
 class LyricChecker {
 
 public:
@@ -31,7 +33,7 @@ public:
     //Functions
     void printREs(void);
     list< list<int> > checkLyrics(string title, string artist, string album);
-    bool isPositiveMatch(string title, string artist, string album);
+    lyric_code isPositiveMatch(string title, string artist, string album);
 
 private:
     //Data
