@@ -30,7 +30,7 @@ list<boost::regex>* LyricChecker::readREs(const char* filename) {
     if(reFile.is_open()) {
 	while(!reFile.eof()) {
 	    getline(reFile,sre);
-	    if(sre.length()) {
+	    if(sre.length() && (sre[0] != '#')) {
 		try {
 		    //Set up RE with case insensitivity
 		    re.assign(sre, boost::regex_constants::icase);
