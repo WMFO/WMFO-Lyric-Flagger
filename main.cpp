@@ -27,14 +27,17 @@ int main(int argc, char* argv[]) {
 		switch (match) {
 			case NOT_FOUND:
 				cout << "No lyrics could be found.\n\n";
+				a.mark("U          .");
 				break;
 
 			case SAFE:
 				cout << "This song is safe for play!\n\n";
+				a.mark("S          .");
 				break;
 
 			case EXPLICIT:
 				cout << "This song is explicit!\n\n";
+				a.mark("E          .");
 				break;
 		}
 	}

@@ -18,7 +18,7 @@ lyrics_mysql::~lyrics_mysql() {
 
 int lyrics_mysql::mark(string group) {
 	stringstream a;
-	a << "UPDATE CART SET GROUP_NAME=\"" << group << "\" WHERE ARTIST=\"" << s_artist \
+	a << "UPDATE CART SET SCHED_CODES=\"" << group << "\" WHERE ARTIST=\"" << s_artist \
 		<< "\" AND TITLE=\"" << s_title << "\" AND ALBUM=\"" << s_album << "\"\n";
 
 	mysqlpp::Query myQuery = myConnect.query(a.str().c_str());
