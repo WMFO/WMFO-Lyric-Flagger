@@ -94,7 +94,6 @@ namespace lyricsGrabber {
 	//Weekly keys are available from http://lyricsfly.com/api/
 	//Review terms and request permanent keys at
 	//http://lyricsfly.com/contact/
-	ifstream keyFile;
 	string skey;
 	skey = lyric_con::return_config("lyricskey");	
 //	keyFile.open(LYRICSFLY_KEYFILE);
@@ -147,24 +146,33 @@ namespace lyricsGrabber {
 			char tmp[50];
 			regerror(status, NULL, tmp, 50);
 			cout << tmp << "\n\n";
-			exit(-1);
+			if (status == REG_NOMATCH) {
+				good_to_go = false;
+				sleep(1);
+				delete[] buf;
+			} else {
+				exit(-1);
+			}
 		}
 
-		char* stat_code;
-		stat_code = new char[matches.rm_eo-matches.rm_so+1]; //+1 for NULL terminator!
-		strncpy(stat_code, buf+matches.rm_so, matches.rm_eo-matches.rm_so);
-		stat_code[matches.rm_eo-matches.rm_so] = '\0';
-		cout << stat_code <<"\n\n";	
-		if (strcmp(stat_code, "<status>200</status>") != 0) {
-			if (strcmp(stat_code, "<status>402</status>") == 0) {
-				good_to_go=false;
-				delete[] buf;
-				sleep(4);
-			} else {
+
+		if (status == 0) {
+			char* stat_code;
+			stat_code = new char[matches.rm_eo-matches.rm_so+1]; //+1 for NULL terminator!
+			strncpy(stat_code, buf+matches.rm_so, matches.rm_eo-matches.rm_so);
+			stat_code[matches.rm_eo-matches.rm_so] = '\0';
+			//cout << stat_code <<"\n\n";	
+			if (strcmp(stat_code, "<status>200</status>") != 0) {
+				if (strcmp(stat_code, "<status>402</status>") == 0) {
+					good_to_go=false;
+					delete[] buf;
+					sleep(1);
+				} else {
+					good_to_go = true;
+				}
+			} else {	
 				good_to_go = true;
 			}
-		} else {	
-			good_to_go = true;
 		}
 
 		regfree(&reg);

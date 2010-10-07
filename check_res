@@ -1,71 +1,62 @@
-# Format:
-# # Original word: 'X'
-# # Spelling variations of 'X' in regex; commented out because they're covered by the last line (e.g. covers fuk and pussi)
-# Vowel-to-nonalphabetic-character substitutions or vowel omissions (e.g. covers f*ck and pssy)
-# Inner letter-to-nonalphabetic substitutions (e.g. cover f**k or p***y)
-# Cover the original spelling variations, and randomly inserted or repeated characters (e.g. fuck, fuuuuck, fu--c032k)
-
-# Original word: 'fuck'
-# fu[ck]?[ck]
-
-# Original word: 'wank'
-# wan[ck]
-
-# Original word: 'dick'
-# more complicated than usual, in order to exclude 'dic' but include every other variation of di[ck]+
-# dik[ck]?
-# dic[ck]
-
-# Original word: 'cock'
-# [ck]o[ck][ck]
-
-# Original word: 'penis'
-# penis
-
-# Original word: 'crap'
-# [ck]rap
-
-# Original word: 'shit'
-# shi[tz]
-
-# Original word: 'piss'
-# piss
-
-# Original word: 'skeet'
-# s[ck]eet
-
-# Original word: 'bitch'
-# bitch
-
-# Original word: 'tits'
-# tits
-
-# Original word: 'titties'
-# titties
-
-# Original word: 'vag' and 'vagina'
-# (?<=[\s])vag(ina|\s)
-
-# Original word: 'pussy'
-# puss[yie]
-
-# Original word: 'cunt'
-# [kc]unt
-
-# Original word: 'twat'
-# twat
-
-# Original word: 'clit'
-# [ck]lit
-
-# Original word: 'ass'
-# ass
-
-# Original word: 'cum'
-# [ck]um
-[ck]+[^a-zA-Z\s]*u+[^a-zA-Z\s]*m+
-
-#Andy's words
+f[^a-zA-Z\s',;()]?[ck]?[ck]
+f[^a-zA-Z\s',;()]+[^a-zA-Z\s',;()]?[ck]
+f+[^a-zA-Z\s',;()]*u+[^a-zA-Z\s',;()]*[ck]*[^a-zA-Z\s',;()]*[ck]+
+w[^a-zA-Z\s',;()]?n[ck]
+w[^a-zA-Z\s',;()]+[^a-zA-Z\s',;()]?[ck]
+w+[^a-zA-Z\s',;()]*a+[^a-zA-Z\s',;()]*n+[^a-zA-Z\s',;()]*[ck]+
+d[^a-zA-Z\s',;()]?k[ck]?
+d[^a-zA-Z\s',;()]?c[ck]
+d[^a-zA-Z\s',;()]+[^a-zA-Z\s',;()]?[ck]
+d+[^a-zA-Z\s',;()]*i+[^a-zA-Z\s',;()]*k+[^a-zA-Z\s',;()]*[ck]*
+d+[^a-zA-Z\s',;()]*i+[^a-zA-Z\s',;()]*c+[^a-zA-Z\s',;()]*[ck]+
+[ck][^a-zA-Z\s',;()]?[ck][ck]
+[ck][^a-zA-Z\s',;()]+[^a-zA-Z\s',;()]?[ck]
+[ck]+[^a-zA-Z\s',;()]*o+[^a-zA-Z\s',;()]*[ck]+[^a-zA-Z\s',;()]*[ck]+
+p[^a-zA-Z\s',;()]?nis
+p[^a-zA-Z\s',;()]+[^a-zA-Z\s',;()]?[^a-zA-Z\s',;()]?s
+p+[^a-zA-Z\s',;()]*e+[^a-zA-Z\s',;()]*n+[^a-zA-Z\s',;()]*i+[^a-zA-Z\s',;()]*s+
+[ck]r[^a-zA-Z\s',;()]?p
+[ck][^a-zA-Z\s',;()]+[^a-zA-Z\s',;()]?p
+[ck]+[^a-zA-Z\s',;()]*r+[^a-zA-Z\s',;()]*a+[^a-zA-Z\s',;()]*p+
+sh[^a-zA-Z\s',;()]?[tz]
+s[^a-zA-Z\s',;()]+[^a-zA-Z\s',;()]?[tz]
+s+[^a-zA-Z\s',;()]*h+[^a-zA-Z\s',;()]*i+[^a-zA-Z\s',;()]*[tz]+
+p[^a-zA-Z\s',;()]?ss
+p[^a-zA-Z\s',;()]+[^a-zA-Z\s',;()]?s
+p+[^a-zA-Z\s',;()]*i+[^a-zA-Z\s',;()]*s+[^a-zA-Z\s',;()]*s+
+s[ck][^a-zA-Z\s',;()]*t
+s[^a-zA-Z\s',;()]+[^a-zA-Z\s',;()]?[^a-zA-Z\s',;()]?t
+s+[^a-zA-Z\s',;()]*[ck]+[^a-zA-Z\s',;()]*e+[^a-zA-Z\s',;()]*e+[^a-zA-Z\s',;()]*t+
+b[^a-zA-Z\s',;()]?tch
+b[^a-zA-Z\s',;()]+[^a-zA-Z\s',;()]?[^a-zA-Z\s',;()]?h
+b+[^a-zA-Z\s',;()]*i+[^a-zA-Z\s',;()]*t+[^a-zA-Z\s',;()]*c+[^a-zA-Z\s',;()]*h+
+t[^a-zA-Z\s',;()]?ts
+t[^a-zA-Z\s',;()]+s
+t+[^a-zA-Z\s',;()]*i+[^a-zA-Z\s',;()]*t+[^a-zA-Z\s',;()]*s+
+t[^a-zA-Z\s',;()]?tties
+t[^a-zA-Z\s',;()]+s
+t+[^a-zA-Z\s',;()]*i+[^a-zA-Z\s',;()]*t+[^a-zA-Z\s',;()]*t+[^a-zA-Z\s',;()]*i+[^a-zA-Z\s',;()]*e+[^a-zA-Z\s',;()]*s+
+(?<=[\s])v[^a-zA-Z\s',;()]g(ina|\s)
+(?<=[\s])v[^a-zA-Z\s',;()]+[^a-zA-Z\s',;()]?([^a-zA-Z\s',;()]?[^a-zA-Z\s',;()]?a|\s)
+(?<=[\s])v+[^a-zA-Z\s',;()]*a+[^a-zA-Z\s',;()]*g+(i+[^a-zA-Z\s',;()]*n+[^a-zA-Z\s',;()]*a+|\s)
+p[^a-zA-Z\s',;()]?ss[yie]
+p[^a-zA-Z\s',;()]+[^a-zA-Z\s',;()]?[^a-zA-Z\s',;()]?[yie]
+p+[^a-zA-Z\s',;()]*u+[^a-zA-Z\s',;()]*s+[^a-zA-Z\s',;()]*s+[^a-zA-Z\s',;()]*[yie]+
+[kc][^a-zA-Z\s',;()]?nt
+[kc][^a-zA-Z\s',;()]+[^a-zA-Z\s',;()]?t
+[kc]+[^a-zA-Z\s',;()]*u+[^a-zA-Z\s',;()]*n+[^a-zA-Z\s',;()]*t+
+tw[^a-zA-Z\s',;()]?t
+t[^a-zA-Z\s',;()]+[^a-zA-Z\s',;()]?t
+t+[^a-zA-Z\s',;()]*w+[^a-zA-Z\s',;()]*a+[^a-zA-Z\s',;()]*t+
+[ck]l[^a-zA-Z\s',;()]?t
+[ck][^a-zA-Z\s',;()]+[^a-zA-Z\s',;()]?t
+[ck]+[^a-zA-Z\s',;()]*l+[^a-zA-Z\s',;()]*i+[^a-zA-Z\s',;()]*t+
+[^a-zA-Z\s',;()]ss[^a-zA-Z]?hole
+a[^a-zA-Z\s',;()]+s[^a-zA-Z]?hole
+a+[^a-zA-Z\s',;()]*s+[^a-zA-Z\s',;()]*s+[^a-zA-Z]?hole
+[ck][^a-zA-Z\s',;()]m
+[ck][^a-zA-Z\s',;()]+m
+[ck]+[^a-zA-Z\s',;()]*u+[^a-zA-Z\s',;()]*m+
 c\*\*\*
 f\*\*\*
 s\*\*\*

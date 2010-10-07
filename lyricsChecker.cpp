@@ -66,6 +66,7 @@ list< list<int> > LyricChecker::checkLyrics(string title,
     
     //Fetch linked list of lyrics
     list<string>* lyrics = lyricsGrabber::getLyrics(title, artist, album);
+    cout << "Lyrics grabbed." << endl;
 
     //Check for empty list
     if (lyrics->empty() == true) {
@@ -100,6 +101,8 @@ list< list<int> > LyricChecker::checkLyrics(string title,
 	}
 	occurances.push_back(counts);
     }
+
+    cout << "Counts calculated." << endl;
 
     delete lyrics;
     return occurances;
