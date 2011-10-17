@@ -5,6 +5,10 @@ WMFO - Tufts Freeform Radio
 ops@wmfo.org
 6-18-10
 
+This program is no longer maintained. Please see version 2 for the
+currently maintained version:
+https://github.com/asayler/WMFO-Lyric-Flagger-v2
+
 This is a program that querys the Internet for lyrics to a specific
 song and then searches these lyrics for matches to a list of regular
 expression.
